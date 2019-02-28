@@ -1,18 +1,17 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <lb-echarts :index="1" :data="{title: '柱状图'}"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import LbEcharts from '@/components/echarts'
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    'lb-echarts': LbEcharts
   }
 }
 </script>
