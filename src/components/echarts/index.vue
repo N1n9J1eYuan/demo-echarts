@@ -5,7 +5,7 @@
         {{origin.title}}
       </div>
     </div>
-    <div class="bottom" id="echart" ref="mychart" style="width: 400px;height: 400px"></div>
+    <div class="bottom" id="echart" ref="mychart" style="width: 600px;height: 400px"></div>
   </div>
 </template>
 
@@ -16,13 +16,15 @@ import 'echarts/lib/chart/line'
 import 'echarts/lib/component/toolbox'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/component/markLine'
+import { data } from '@/utils/index.js'
 
 export default {
   name: 'LbEcharts',
   data () {
     return {
       // myChart实例
-      myChart: {}
+      myChart: {},
+      flag: true
     }
   },
   props: {
@@ -47,92 +49,18 @@ export default {
   computed: {
     origin () {
       return this.data
-    },
-    opt() {
-      let obj = {
-        calculable : true,
-        xAxis: [
-          {
-            type: 'category',
-            data: ['', '上个周期','当前周期'],
-            axisPointer: {
-              type: 'shadow'
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            name: '累计练习数量',
-            min: 0,
-            max: 10,
-            interval: 2,
-            axisLabel: {
-              formatter: '{value} 个'
-            }
-          }
-        ],
-        series: [
-          {
-            name:'累计练习数量',
-            type:'bar',
-            data:[2, 4, 6],
-            barWidth: 30,
-            label: {
-              normal: {
-                show: true,
-                position: 'insideTop',
-                color: '#000',
-                fontSize: 18
-              }
-            },
-            markLine : {
-              data : [
-                { type : 'average', name: '平均值' }
-              ]
-            }
-          },
-          {
-            name:'分数',
-            type:'bar',
-            data:[5, 4, 7],
-            barWidth: 30,
-            label: {
-              normal: {
-                show: true,
-                position: 'insideTop',
-                color: '#000',
-                fontSize: 18
-              }
-            },
-            markLine : {
-              data : [
-                {
-                  type : 'average',
-                  name: '平均值',
-                  label: {
-                    show: true,
-                    position: 'end',
-                    formatter: ''
-                  }
-                }
-              ]
-            }
-          }
-        ],
-        color: ['rgb(251,223,83)','rgb(240,158,114)', 'rgb(0, 0, 0)']
-      }
-      return obj
     }
   },
   methods: {
     setEchart () {
+      const opt = data[this.index]
       let dom = this.$refs.mychart;
       this.myChart = echarts.init(dom);
-      this.myChart.setOption(this.opt);
+      this.myChart.setOption(opt);
     },
     chartChange () {
-      this.myChart.setOption(this.opt);
+      const opt = data[this.index]
+      this.myChart.setOption(opt)
     }
   }
 }
