@@ -15,7 +15,7 @@ export default {
       type: Object
     }
   },
-  mixins: [],
+  mixins: [formMixin],
   provide() {
     return { form : this };
   },

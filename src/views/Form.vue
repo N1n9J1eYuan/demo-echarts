@@ -27,7 +27,6 @@ export default {
             if (val > 30 || val < 0) {
               callBack('请输入正确的分数')
               alert('请输入正确的分数')
-              console.log(rule)
               this.formData[rule.field] = ''
             }
           }}

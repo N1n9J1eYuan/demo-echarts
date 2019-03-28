@@ -6,10 +6,12 @@
 
 <script>
 import validatorInput from '@/mixins/validatorInput.js'
+import emmiter from '@/mixins/emmiter.js'
+import formItem from '@/mixins/formItem.js'
 export default {
   name: 'FormItem',
   inject: ['form'],
-  mixins: [validatorInput],
+  mixins: [formItem, emmiter],
   props: {
     type: {
       type: String,
@@ -17,10 +19,21 @@ export default {
     },
     prop: {
       type: String
+    },
+    rules: {
+      type: [Object, Array]
+    }
+  },
+  data() {
+    return {
+      isRequired: false
     }
   },
   mounted() {
-    // console.log(this.form.rules, 26)
+    if (this.prop) {
+      this.dispatch('LbForm', 'on-form-item-add', this)
+      this.setRules()
+    }
   }
 }
 </script>
