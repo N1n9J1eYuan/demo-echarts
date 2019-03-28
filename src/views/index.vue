@@ -4,17 +4,8 @@
 </template>
 
 <script>
-import echartsComponent from '@/components/echarts/index'
 export default {
-  name: 'index',
-  components: {
-    echartsComponent
-  },
-  data() {
-    return {
-      index: 1
-    }
-  }
+  name: 'index'
 }
 </script>
 

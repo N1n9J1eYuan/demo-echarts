@@ -1,33 +1,50 @@
 <template>
-  <div>
-    <lb-input type="text"/>
-  </div>
+  <form>
+    <lb-form :rules="ruleValidate" :model="formData">
+      <form-item prop="toefl">
+        <input type="number" v-model="formData.toefl"/>
+      </form-item>
+    </lb-form>
+  </form>
 </template>
 
 <script>
-import inputs from '@/components/form/input.vue'
+import formItem from '@/components/form/FormItem.vue';
+import lbForm from '@/components/form/form.vue';
+import ValidatorUtils from '@/utils/validatorUtils';
 export default {
   name: 'FormDemo',
-  provide() {
-    return {
-      form: this,
-      name: 'sanfen'
-    }
-  },
   components: {
-    'lb-input': inputs
+    formItem,
+    lbForm
   },
   data() {
     return {
-      age: 19,
       ruleValidate: {
-        toefl: [{
-          message: '单科分数为 0 - 30 分，请输入正确的分数',
-          trigger: 'blur',
-          score: [0, 30]
-        }]
+        toefl: [
+          { required: true, type: 'string', trigger: 'blur' },
+          { validator: (rule, val, callBack) => {
+            if (val > 30 || val < 0) {
+              callBack('请输入正确的分数')
+              alert('请输入正确的分数')
+              console.log(rule)
+              this.formData[rule.field] = ''
+            }
+          }}
+        ]
+      },
+      formData: {
+        toefl: null
       }
     }
+  },
+  created() {
+    this.validator = new ValidatorUtils({
+      rules: this.ruleValidate,
+      data: this.formData,
+      automatic: true,
+      self: this })
+    this.formData = this.validator.Data
   }
 }
 </script>
