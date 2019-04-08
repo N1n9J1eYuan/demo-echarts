@@ -1,11 +1,16 @@
 <template>
   <div>
+    <echartsDemo ref="echarts"/>
   </div>
 </template>
 
 <script>
+import echartsDemo from '@/components/echarts/echarts'
 export default {
-  name: 'index'
+  name: 'index',
+  components: {
+    echartsDemo
+  }
 }
 </script>
 

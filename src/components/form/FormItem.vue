@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import validatorInput from '@/mixins/validatorInput.js'
+// import validatorInput from '@/mixins/validatorInput.js'
 import emmiter from '@/mixins/emmiter.js'
 import formItem from '@/mixins/formItem.js'
 export default {

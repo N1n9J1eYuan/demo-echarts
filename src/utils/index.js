@@ -1,3 +1,4 @@
+import echarts from 'echarts'
 export const data = {
   1: {
     xAxis: [
@@ -193,4 +194,80 @@ export const data = {
       }
     ]
   }
+}
+
+export const data2 = {
+
+  color: ["#0080ff","#4cd5ce"],
+  grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+  },
+  legend: {
+    data: ['邮件营销'],
+    align: 'left',
+    left: 10,
+  },
+  xAxis : [
+      {
+          type : 'category',
+          boundaryGap : false,
+          data : ['周一','周二','周三','周四','周五','周六','周日'],
+          splitLine: {
+              show: true
+          }
+      }
+  ],
+  yAxis : [
+      {
+          type : 'value'
+      }
+  ],
+  series : [
+
+      {
+          name:'邮件营销',
+          type:'line',
+          stack: '总量',
+          smooth: true,
+          itemStyle: {  
+              normal: {   //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1,[{
+                          offset: 0, color: '#d7f4f8' // 0% 处的颜色
+                      }, {
+                          offset: 0.5, color: '#eefcfd' // 100% 处的颜色
+                      }, {
+                          offset: 1, color: '#fff' // 100% 处的颜色
+                      }]
+                  ),  //背景渐变色 
+                  lineStyle: {        // 系列级个性化折线样式  
+                      width: 2,  
+                      type: 'solid',  
+                      color: "#4fd6d2"
+                  }
+              },  
+              emphasis: {  
+                  color: '#4fd6d2',  
+                  lineStyle: {        // 系列级个性化折线样式  
+                      width:2,  
+                      type: 'dotted',  
+                      color: "#4fd6d2" //折线的颜色
+                  }  
+              }  
+          },//线条样式  
+          symbolSize:5, //折线点的大小
+          areaStyle: {normal: {}},
+          data:[320, 332, 601, 134, 120, 230, 210]
+      }
+  ],
+  dataZoom: [
+      {
+          type: 'inside',
+          startValue: 0,
+          endValue: 4,
+          zoomLock: true
+      }
+  ]
 }
